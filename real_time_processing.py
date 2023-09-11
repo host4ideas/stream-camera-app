@@ -16,6 +16,9 @@ class RealTimeProcessing:
     def set_current_bg_filter(self, bg_filter: BackgroundFilter):
         self.__current_bg_filter = bg_filter
 
+    def get_current_bg_filter(self):
+        return self.__current_bg_filter
+
     def frame_processing(self, frame):
         filtered_frame = frame
         # Apply Blur filter through GaussianBlur
