@@ -1,3 +1,5 @@
 flet
 rembg
 cvzone
+aiohttp
+aiortc
