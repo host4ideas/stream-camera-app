@@ -3,7 +3,7 @@ from webcam_stream import WebcamStream
 from real_time_processor import RealTimeProcessor
 from typing import Any
 import numpy.typing as npt
-from utils import array_to_base64, Filter
+from utils.utils import array_to_base64, Filter
 
 
 class App:
@@ -29,6 +29,7 @@ class App:
         self.page.title = "Flet counter example"
         self.page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
+        # Text field to show selected filter
         self.current_filter_text = ft.Text(
             value='Actual background filter:\n' +
             self.available_filters[self.current_filter_index],
@@ -62,12 +63,9 @@ class App:
             # self.real_time_processor.set_current_bg_filter(
             #     Filter[self.available_filters[self.current_filter_index]])
 
-            self.current_filter_text.value = 'Actual background filter:\n{}'.format(
-                self.available_filters[self.current_filter_index]),
-
+            # Update filter mode text
+            self.current_filter_text.value = f'Actual background filter:\n{self.available_filters[self.current_filter_index]}'
             self.page.update()
-            print('Current filter:',
-                  self.available_filters[self.current_filter_index])
 
         def prev_filter(e):
             # Check if the next index is higher than the number of available filters
@@ -78,12 +76,10 @@ class App:
             # self.real_time_processor.set_current_bg_filter(
             #    Filter[self.available_filters[self.current_filter_index]])
 
-            self.current_filter_text.value = 'Actual background filter:\n{}'.format(
-                self.available_filters[self.current_filter_index]),
-
+            # Update filter mode text
+            self.current_filter_text.value = 'Actual background filter:\n {}'.format(
+                self.available_filters[self.current_filter_index])
             self.page.update()
-            print('Current filter:',
-                  self.available_filters[self.current_filter_index])
 
         def stop_streaming(e):
             self.real_time_processor.stop()

@@ -7,6 +7,21 @@ from utils import array_to_base64, Filter
 
 
 def main(page: ft.Page):
+    # Save Filters enum names to list to be able to iterate over them (for next / prev functionality)
+    available_filters = list(
+        map(lambda x: x.name, Filter._member_map_.values()))
+    # Save current filter index over the filters list to know where you are
+    current_filter_index = 0
+
+    page.title = "Flet counter example"
+    page.vertical_alignment = ft.MainAxisAlignment.CENTER
+
+    # Text field to show selected filter
+    current_filter_text = ft.Text(
+        value='Actual background filter:\n {}'.format(
+            available_filters[current_filter_index]),
+        text_align=ft.TextAlign.CENTER)
+
     # Default black image
     camera_img_default = "R0lGODlhAQABAIAAAAUEBAAAACwAAAAAAQABAAACAkQBADs="
 
@@ -18,15 +33,6 @@ def main(page: ft.Page):
         src_base64=camera_img_default
     )
 
-    # Save Filters enum names to list to be able to iterate over them (for next / prev functionality)
-    available_filters = list(
-        map(lambda x: x.name, Filter._member_map_.values()))
-    # Save current filter index over the filters list to know where you are
-    current_filter_index = 0
-
-    page.title = "Flet counter example"
-    page.vertical_alignment = ft.MainAxisAlignment.CENTER
-
     def handle_frame_change(img_camera: ft.Image, frame: npt.NDArray[Any]):
         img_camera.src_base64 = array_to_base64(frame)
         page.update()
@@ -37,10 +43,11 @@ def main(page: ft.Page):
             current_filter_index += 1
         # real_time_processor.set_current_bg_filter(
         #     Filter[available_filters[current_filter_index]])
+
+        # Update filter mode text
+        current_filter_text.value = 'Actual background filter:\n {}'.format(
+            available_filters[current_filter_index])
         page.update()
-        print('Current filter index:', current_filter_index)
-        print('Current filter:',
-              available_filters[current_filter_index])
 
     def prev_filter(current_filter_index: int, available_filters: list[str], real_time_processor: RealTimeProcessor):
         # Check if the next index is higher than the number of available filters
@@ -49,10 +56,10 @@ def main(page: ft.Page):
         # Update filter to process
         # real_time_processor.set_current_bg_filter(
         #    Filter[available_filters[current_filter_index]])
+
+        current_filter_text.value = 'Actual background filter:\n {}'.format(
+            available_filters[current_filter_index])
         page.update()
-        print('Current filter index:', current_filter_index)
-        print('Current filter:',
-              available_filters[current_filter_index])
 
     def stop_streaming(real_time_processor: RealTimeProcessor, img_camera: ft.Image):
         real_time_processor.stop()
@@ -88,10 +95,7 @@ def main(page: ft.Page):
                         ft.Row([
                             ft.IconButton(ft.icons.SKIP_PREVIOUS,
                                           on_click=lambda e: prev_filter(current_filter_index, available_filters, real_time_processor)),
-                            ft.Text(
-                                value='Actual background filter:\n' +
-                                available_filters[current_filter_index],
-                                text_align=ft.TextAlign.CENTER),
+                            current_filter_text,
                             ft.IconButton(ft.icons.SKIP_NEXT,
                                           on_click=lambda e: next_filter(current_filter_index, available_filters, real_time_processor)),
                         ])

@@ -3,7 +3,7 @@ import cv2
 import time
 from cvzone.SelfiSegmentationModule import SelfiSegmentation
 from webcam_stream import WebcamStream
-from utils import Filter
+from utils.utils import Filter
 from typing import Callable, Any
 import numpy.typing as npt
 
@@ -28,7 +28,7 @@ class RealTimeProcessor:
         return self.__segmentor.removeBG(frame, filtered_frame, cutThreshold=0.50)
 
     def stop(self):
-        self.webcam_stream.stopped = True
+        self.webcam_stream.stop()
 
     def start(self):
         # If it was stopped, start again

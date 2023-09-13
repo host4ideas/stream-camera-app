@@ -30,8 +30,8 @@ class WebcamStream:
         # daemon threads keep running in the background while the program is executing
         self.t.daemon = True
 
-    # method for starting the thread for grabbing next available frame in input stream
     def start(self):
+        '''Start the thread to grab the next available frame in input stream. Execute only once.'''
         self.stopped = False
         self.t.start()
 
@@ -51,6 +51,6 @@ class WebcamStream:
     def read(self):
         return self.frame
 
-    # method called to stop reading frames
     def stop(self):
+        '''Method called to stop reading frames.'''
         self.stopped = True
