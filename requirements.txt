@@ -3,4 +3,3 @@ rembg
 cvzone
 aiohttp
 aiortc
-zeroconf
