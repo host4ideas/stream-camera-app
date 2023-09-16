@@ -49,12 +49,5 @@ def create_blank(width, height, rgb_color=(0, 0, 0)):
     return image
 
 
-# Create new blank 300x300 red image
-width, height = 300, 300
-
-red = (255, 0, 0)
-image = create_blank(width, height, rgb_color=red)
-cv2.imwrite('red.jpg', image)
-
 Filter = Enum('Filter', ['BLUR', 'COLOR', 'IMAGE'])
 '''Enum with available filters for the user to use'''

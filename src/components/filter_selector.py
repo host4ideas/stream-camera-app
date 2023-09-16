@@ -1,5 +1,5 @@
 import flet as ft
-from src.utils.utils import Filter
+from src.utils.helpers import Filter
 
 
 class FilterSelector(ft.UserControl):

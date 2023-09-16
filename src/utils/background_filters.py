@@ -1,6 +1,6 @@
 import cv2
 from cv2.typing import MatLike
-from src.utils.utils import Filter, create_blank
+from src.utils.helpers import Filter, create_blank
 from cvzone.SelfiSegmentationModule import SelfiSegmentation
 
 segmentor = SelfiSegmentation()

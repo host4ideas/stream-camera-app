@@ -1,9 +1,9 @@
+import cv2
 import flet as ft
 from typing import Any
 import numpy.typing as npt
-from src.utils.utils import array_to_base64, Filter
+from src.utils.helpers import array_to_base64, Filter
 from src.utils.background_filters import blur_background
-import cv2
 
 
 class CameraImage(ft.UserControl):
@@ -30,10 +30,7 @@ class CameraImage(ft.UserControl):
         self.update()
 
     def stop_streaming(self):
-        # Default camera's image to black
-        self.img_camera.src_base64 = self.camera_img_default
-        self.webcam_stopped = False
-        self.update()
+        self.webcam_stopped = True
 
     def start_streaming(self):
         if self.webcam_stopped == True:
@@ -44,6 +41,8 @@ class CameraImage(ft.UserControl):
                     print("[Exiting]: Error accessing webcam stream.")
                     break
                 if self.webcam_stopped == True:
+                    self.img_camera.src_base64 = self.camera_img_default
+                    self.update()
                     break
                 grabbed, frame = vcap.read()
                 frame = blur_background(frame)

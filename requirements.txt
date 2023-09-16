@@ -1,5 +1,7 @@
 flet
-rembg
 cvzone
 aiohttp
 aiortc
+imagezmq
+imutils
+simplejpeg

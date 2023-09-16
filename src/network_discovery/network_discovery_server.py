@@ -1,7 +1,11 @@
 from socket import socket, AF_INET, SOCK_DGRAM
 from socket import socket, AF_INET, SOCK_DGRAM, SOL_SOCKET, SO_BROADCAST, gethostbyname, gethostname
 from time import sleep
-from utils.constants import PORT, MAGIC
+# from utils.constants import PORT, MAGIC
+
+PORT = 50000
+# to make sure we don't confuse or get confused by other programs
+MAGIC = "acb708ca9ec7911f28430e90bad070e1"
 
 
 s = socket(AF_INET, SOCK_DGRAM)  # create UDP socket
