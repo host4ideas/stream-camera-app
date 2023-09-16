@@ -1,5 +1,8 @@
-*.cfg
-*.weights
+# Commit buildzoer configs
+!.buildozer.spec
+# Skip SDK and NDK cache for Docker
+.buildozer
+bin/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
